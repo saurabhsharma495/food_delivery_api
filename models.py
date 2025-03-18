@@ -2,6 +2,7 @@ from db_config import Base
 from sqlalchemy import Column, Integer, Boolean, String, Text, Enum, ForeignKey
 from sqlalchemy.orm import relationship
 import enum
+from sqlalchemy import CheckConstraint
 
 
 class User(Base):
@@ -30,7 +31,7 @@ class FoodSizeEnum(enum.Enum):
     small = "small"
     medium = "medium"
     large = "large"
-    extra_large = "extra-large"
+    extra_large = "extra_large"
 
 
 class Order(Base):
@@ -41,6 +42,10 @@ class Order(Base):
     food_size = Column(Enum(FoodSizeEnum), default=FoodSizeEnum.small)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship('User', back_populates='orders')
+
+    __table_args__ = (
+        CheckConstraint("food_size IN ('small', 'medium', 'large', 'extra_large')", name="food_size_check"),
+    )
 
     def __repr__(self):
         return f'<Order {self.id} >'

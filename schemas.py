@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from models import OrderStatusEnum, FoodSizeEnum
 
 
 class SignUpModel(BaseModel):
@@ -31,3 +32,19 @@ class LoginModel(BaseModel):
     username: str
     password: str
 
+
+class OrderModel(BaseModel):
+    id: Optional[int]
+    quantity: int
+    order_status: Optional[str] = OrderStatusEnum.pending
+    food_size: Optional[str] = FoodSizeEnum.small
+    user_id: Optional[int]
+
+    class Config:
+        orm_mode = True
+        schema_extra = {
+            "example": {
+                "quantity": 2,
+                "food_size": "medium"
+            }
+        }
