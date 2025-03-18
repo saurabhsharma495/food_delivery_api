@@ -15,7 +15,7 @@ DB_PORT = os.getenv("DB_PORT")
 
 
 # print(f"DB_NAME: {DB_NAME}, DB_USER: {DB_USER}, DB_PASSWORD: {DB_PASSWORD},  DB_HOST: {DB_HOST}, DB_PORT: {DB_PORT}")
-# PostgreSQL connection URL for SQLAlchemy
+# PostgresSQL connection URL for SQLAlchemy
 password = DB_PASSWORD.replace('@', '%40', 1)
 DATABASE_URL = f"postgresql://{DB_USER}:{password}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
