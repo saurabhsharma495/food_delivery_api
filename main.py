@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi_jwt_auth import AuthJWT
-from apis.auth_routes import auth_router
-from apis.order_routes import order_router
-from db_operations.db_config import engine
+from auth_routes import auth_router
+from order_routes import order_router
+from db_config import engine
 from schemas import Settings
-from db_operations.initialize_database import check_and_create_table
+from initialize_database import check_and_create_table
 
 
 app = FastAPI()
